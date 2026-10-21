@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout | Nimbus Wireless</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/index.html">Nimbus<span>Wireless</span></a>
+  <nav aria-label="Primary">
+    <a href="/plans.html">Plans</a>
+    <a href="/phones.html">Shop Phones</a>
+    <a href="/pay-bill.html">Pay Bill</a>
+    <a href="/support.html">Support</a>
+    <a href="/account.html">My Account</a>
+    <a class="nav-cart" href="/cart.html">Cart</a>
+  </nav>
+</header>
+<main>
+<h1>Checkout</h1>
+<section class="panel" aria-label="Order summary">
+  <h2>Order summary</h2>
+  <div class="summary-row"><span>Nimbus X15</span><strong>$799.00</strong></div>
+</section>
+<section class="panel" aria-label="Shipping and payment">
+  <form aria-label="Checkout form" action="/order-confirmation.html" method="get">
+    <label for="name">Full name</label>
+    <input id="name" name="name" required>
+    <label for="address">Shipping address</label>
+    <input id="address" name="address" required>
+    <label for="card">Card number</label>
+    <input id="card" name="card" inputmode="numeric" required>
+    <label for="promo">Promo code</label>
+    <input id="promo" name="promo">
+    <button type="submit" class="btn btn-primary">Place Order</button>
+  </form>
+</section>
+</main>
+<footer class="site-footer"><p>&copy; 2026 Nimbus Wireless &mdash; a fictional carrier. Demo site for UI parity testing.</p></footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

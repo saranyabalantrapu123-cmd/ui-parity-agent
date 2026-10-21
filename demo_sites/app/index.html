@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Home &middot; Nimbus</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body class="app">
+<header class="app-bar">
+  <a class="app-bar__brand" href="/index.html">Nimbus</a>
+  <span class="app-bar__title">Home</span>
+  <a class="app-bar__icon" href="/support.html" aria-label="Support">Help</a>
+  <a class="app-bar__icon" href="/bag.html" aria-label="Bag">Bag</a>
+</header>
+<main>
+<section class="hero" aria-label="Welcome">
+  <h1>Welcome to Nimbus Wireless</h1>
+  <p>Fast 5G, simple plans, and phones you'll love.</p>
+  <div class="hero-actions">
+    <a class="btn btn-light" href="/plans.html">Explore Plans</a>
+    <a class="btn btn-secondary" href="/devices.html">Browse Phones</a>
+  </div>
+</section>
+<section class="features" aria-label="Why Nimbus">
+  <h2>Why Nimbus</h2>
+  <div class="card-grid">
+    <article class="card"><h3>Nationwide 5G</h3><p>Coverage for 98% of people across the country.</p></article>
+    <article class="card"><h3>No Annual Contract</h3><p>Switch or cancel any time, no strings attached.</p></article>
+    <article class="card"><h3>24/7 Support</h3><p>Real people and a smart assistant, day or night.</p></article>
+  </div>
+</section>
+</main>
+<nav class="tab-bar" aria-label="Tabs">
+  <a href="/index.html" aria-current="page"><span class="dot"></span>Home</a>
+  <a href="/devices.html"><span class="dot"></span>Devices</a>
+  <a href="/plans.html"><span class="dot"></span>Plans</a>
+  <a href="/billing.html"><span class="dot"></span>Billing</a>
+  <a href="/profile.html"><span class="dot"></span>Profile</a>
+</nav>
+<div class="chat-launcher" id="nimbus-assistant" aria-label="Nimbus Assistant">
+  <div class="chat-window" hidden>
+    <div class="chat-window__head">Nova &middot; Nimbus Assistant</div>
+    <p class="chat-window__msg">Hi, I'm Nova. Ask me about plans, bills, or devices.</p>
+  </div>
+  <button type="button" class="chat-launcher__btn" aria-expanded="false">Ask Nova</button>
+</div>
+<script src="/assets/app.js"></script>
+</body>
+</html>

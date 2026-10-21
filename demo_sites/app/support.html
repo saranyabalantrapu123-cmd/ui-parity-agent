@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Support &middot; Nimbus</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body class="app">
+<header class="app-bar">
+  <a class="app-bar__brand" href="/index.html">Nimbus</a>
+  <span class="app-bar__title">Support</span>
+  <a class="app-bar__icon" href="/support.html" aria-label="Support">Help</a>
+  <a class="app-bar__icon" href="/bag.html" aria-label="Bag">Bag</a>
+</header>
+<main>
+<h1>Support</h1>
+<p class="lede">Find answers fast or talk to Nova, our assistant.</p>
+<section class="panel" aria-label="Search help">
+  <form aria-label="Help search" action="/support.html" method="get" role="search">
+    <label for="q">Search help articles</label>
+    <input id="q" name="q" placeholder="e.g. set up voicemail">
+  </form>
+</section>
+<section class="topics" aria-label="Popular topics">
+  <h2>Popular topics</h2>
+  <div class="card-grid">
+    <article class="card"><h3>Billing help</h3><p>Understand charges, autopay, and due dates.</p></article>
+    <article class="card"><h3>Device setup</h3><p>Activate, transfer data, and set up eSIM.</p></article>
+    <article class="card"><h3>Network &amp; coverage</h3><p>Check coverage and troubleshoot signal.</p></article>
+  </div>
+</section>
+<section class="chat-panel" aria-label="Chat with Nova">
+  <p class="bubble">Hi, I'm Nova. How can I help today?</p>
+  <button type="button" class="btn btn-primary">Start a conversation</button>
+</section>
+</main>
+<nav class="tab-bar" aria-label="Tabs">
+  <a href="/index.html"><span class="dot"></span>Home</a>
+  <a href="/devices.html"><span class="dot"></span>Devices</a>
+  <a href="/plans.html"><span class="dot"></span>Plans</a>
+  <a href="/billing.html"><span class="dot"></span>Billing</a>
+  <a href="/profile.html"><span class="dot"></span>Profile</a>
+</nav>
+<script src="/assets/app.js"></script>
+</body>
+</html>

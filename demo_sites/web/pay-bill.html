@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pay Bill | Nimbus Wireless</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/index.html">Nimbus<span>Wireless</span></a>
+  <nav aria-label="Primary">
+    <a href="/plans.html">Plans</a>
+    <a href="/phones.html">Shop Phones</a>
+    <a href="/pay-bill.html">Pay Bill</a>
+    <a href="/support.html">Support</a>
+    <a href="/account.html">My Account</a>
+    <a class="nav-cart" href="/cart.html">Cart</a>
+  </nav>
+</header>
+<main>
+<h1>Pay Bill</h1>
+<section class="panel" aria-label="Balance">
+  <article class="card"><h3>Current balance</h3><p class="price">$65.00</p><p>Due November 5, 2026</p></article>
+</section>
+<section class="panel" aria-label="Make a payment">
+  <form aria-label="Payment form" action="/pay-bill-review.html" method="get">
+    <label for="amount">Amount</label>
+    <input id="amount" name="amount" value="65.00" required>
+    <label for="method">Payment method</label>
+    <select id="method" name="method"><option>Visa ending 4242</option><option>Bank account ending 0110</option></select>
+    <button type="submit" class="btn btn-primary">Review Payment</button>
+  </form>
+</section>
+<section class="assistant-inline" aria-label="Nimbus Assistant">
+  <p><strong>Questions about your bill?</strong> Nova, our assistant, can explain every charge.</p>
+  <button type="button" class="btn btn-secondary">Ask Nova</button>
+</section>
+</main>
+<footer class="site-footer"><p>&copy; 2026 Nimbus Wireless &mdash; a fictional carrier. Demo site for UI parity testing.</p></footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

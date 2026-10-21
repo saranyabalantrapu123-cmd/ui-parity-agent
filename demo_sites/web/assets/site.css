@@ -1,0 +1,95 @@
+/* Nimbus Wireless - desktop web demo site (fictional brand). */
+:root {
+  --brand: #4338ca;
+  --brand-dark: #312e81;
+  --accent: #0d9488;
+  --ink: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+a { color: var(--brand); }
+.site-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px; background: #fff; border-bottom: 1px solid var(--line);
+}
+.logo { font-weight: 800; font-size: 22px; text-decoration: none; color: var(--brand-dark); letter-spacing: -0.5px; }
+.logo span { color: var(--accent); font-weight: 600; margin-left: 4px; }
+.site-header nav { display: flex; gap: 28px; }
+.site-header nav a { text-decoration: none; color: var(--ink); font-weight: 500; font-size: 15px; }
+.site-header nav a:hover { color: var(--brand); }
+.site-header nav .nav-cart { background: var(--brand); color: #fff; padding: 6px 14px; border-radius: 999px; }
+main { max-width: 1120px; margin: 0 auto; padding: 40px 48px 80px; }
+h1 { font-size: 40px; margin: 0 0 12px; letter-spacing: -1px; }
+h2 { font-size: 24px; margin: 0 0 16px; }
+h3 { margin: 0 0 6px; font-size: 18px; }
+.lede { color: var(--muted); font-size: 18px; margin-top: 0; }
+.btn {
+  display: inline-block; border: 0; border-radius: 8px; padding: 12px 22px; font-size: 15px;
+  font-weight: 600; text-decoration: none; cursor: pointer; font-family: inherit;
+}
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-secondary { background: #eef2ff; color: var(--brand-dark); }
+.btn-light { background: #fff; color: var(--brand-dark); }
+.btn-ghost { background: transparent; color: var(--brand); border: 1px solid var(--brand); }
+.hero {
+  background: linear-gradient(120deg, #312e81, #4338ca 60%, #0d9488);
+  color: #fff; border-radius: 16px; padding: 56px; margin-bottom: 28px;
+}
+.hero p { font-size: 19px; opacity: .9; }
+.hero-actions { display: flex; gap: 12px; margin-top: 20px; }
+.promo-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: #fef3c7; border: 1px solid #fcd34d; border-radius: var(--radius);
+  padding: 18px 24px; margin-bottom: 32px;
+}
+.promo-banner p { margin: 0; font-size: 16px; }
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px;
+}
+.card p { color: var(--muted); margin: 6px 0 16px; }
+.price { font-size: 28px; font-weight: 700; color: var(--ink) !important; }
+.price small { font-size: 14px; color: var(--muted); font-weight: 500; }
+.split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
+.device-shot {
+  height: 380px; border-radius: 16px; background: linear-gradient(160deg, #e0e7ff, #c7d2fe 50%, #99f6e4);
+  display: grid; place-items: center; font-size: 22px; color: var(--brand-dark); font-weight: 700;
+}
+.specs { padding-left: 18px; color: var(--muted); }
+.panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-top: 24px; }
+form label { display: block; font-weight: 600; font-size: 14px; margin: 14px 0 6px; }
+form input, form select {
+  width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-family: inherit;
+}
+form .btn { margin-top: 20px; }
+.line-item { display: flex; justify-content: space-between; align-items: center; }
+.summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.assistant-inline {
+  margin-top: 24px; background: #ecfeff; border: 1px solid #99f6e4; border-radius: var(--radius);
+  padding: 18px 24px; display: flex; align-items: center; justify-content: space-between;
+}
+.assistant-inline p { margin: 0; }
+.chat-panel { margin-top: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.chat-panel .bubble { background: #eef2ff; border-radius: 12px; padding: 10px 14px; display: inline-block; margin-bottom: 12px; }
+.chat-launcher { position: fixed; right: 28px; bottom: 28px; z-index: 50; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.chat-launcher__btn {
+  background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 14px 22px;
+  font-weight: 700; font-size: 15px; box-shadow: 0 8px 24px rgba(13,148,136,.35); cursor: pointer;
+}
+.chat-window { width: 300px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,.15); overflow: hidden; }
+.chat-window__head { background: var(--accent); color: #fff; padding: 10px 14px; font-weight: 700; }
+.chat-window__msg { padding: 12px 14px; margin: 0; }
+.confirm { text-align: center; padding: 64px 0; }
+.confirm .tick { width: 72px; height: 72px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 34px; margin: 0 auto 16px; }
+.site-footer { border-top: 1px solid var(--line); background: #fff; color: var(--muted); font-size: 13px; text-align: center; padding: 24px; }

@@ -1,0 +1,125 @@
+# Ground truth: every difference deliberately planted between the Nimbus Wireless web site
+# (demo_sites/web) and its mobile app (demo_sites/app). `make eval` scores the agent's findings
+# against this list (precision / recall per category).
+#
+# Matching rules (see parity_agent/evaluate.py): same category, same page (web_page or app_page)
+# or same flow, and - when `subject` is given - a fuzzy match on the finding's subject.
+# Anything the agent reports that is NOT listed here counts as a false positive.
+
+differences:
+  # ------------------------------------------------------------------ page names
+  - id: PD01
+    category: page_name
+    web_page: /plans.html
+    app_page: /plans.html
+    description: '"Plans" on web vs "Plans & Pricing" in the app.'
+  - id: PD02
+    category: page_name
+    web_page: /phones.html
+    app_page: /devices.html
+    description: '"Shop Phones" on web vs "Devices" in the app (different URL too).'
+  - id: PD03
+    category: page_name
+    web_page: /cart.html
+    app_page: /bag.html
+    description: '"Cart" on web vs "Bag" in the app.'
+  - id: PD04
+    category: page_name
+    web_page: /pay-bill.html
+    app_page: /billing.html
+    description: '"Pay Bill" on web vs "Billing & Payments" in the app.'
+  - id: PD05
+    category: page_name
+    web_page: /account.html
+    app_page: /profile.html
+    description: '"My Account" on web vs "Profile" in the app.'
+
+  # ------------------------------------------------------------------ AI chat assistant
+  - id: PD06
+    category: chatbot
+    web_page: /plans.html
+    app_page: /plans.html
+    description: Assistant floating bottom-right on web, missing in the app.
+  - id: PD07
+    category: chatbot
+    web_page: /phones.html
+    app_page: /devices.html
+    description: Assistant floating bottom-right on web, inside the app header in the app.
+  - id: PD08
+    category: chatbot
+    web_page: /checkout.html
+    app_page: /checkout.html
+    description: Assistant missing on web checkout, floating bottom-right in the app.
+  - id: PD09
+    category: chatbot
+    web_page: /pay-bill.html
+    app_page: /billing.html
+    description: Assistant inline in the page body on web, floating bottom-right in the app.
+
+  # ------------------------------------------------------------------ components
+  - id: PD10
+    category: component
+    web_page: /
+    app_page: /
+    subject: Trade-in promotion
+    description: Promo banner ("$200 off the Nimbus X15") on the web home page only.
+  - id: PD11
+    category: component
+    web_page: /phones/nimbus-x15.html
+    app_page: /devices/x15.html
+    subject: Trade-in estimator
+    description: Trade-in estimator widget on the web product page only.
+  - id: PD12
+    category: component
+    web_page: /checkout.html
+    app_page: /checkout.html
+    subject: Promo code
+    description: Checkout form has a "Promo code" field on web only.
+  - id: PD13
+    category: component
+    web_page: /account.html
+    app_page: /profile.html
+    subject: Nimbus Rewards
+    description: '"Nimbus Rewards" section exists in the app profile only.'
+
+  # ------------------------------------------------------------------ call-to-action labels
+  - id: PD14
+    category: cta
+    web_page: /plans.html
+    app_page: /plans.html
+    subject: Select Plan
+    description: Plan cards say "Select Plan" on web vs "Choose Plan" in the app.
+  - id: PD15
+    category: cta
+    web_page: /phones/nimbus-x15.html
+    app_page: /devices/x15.html
+    subject: Buy Now
+    description: Primary product CTA "Buy Now" on web vs "Add to Bag" in the app.
+  - id: PD16
+    category: cta
+    web_page: /pay-bill.html
+    app_page: /billing.html
+    subject: Review Payment
+    description: Payment form submit "Review Payment" on web vs "Continue" in the app.
+
+  # ------------------------------------------------------------------ page coverage
+  - id: PD17
+    category: coverage
+    app_page: /protection.html
+    description: App-only "Protect Your Device" interstitial between product and bag.
+
+  # ------------------------------------------------------------------ happy-path flows
+  - id: PD18
+    category: flow
+    flow: buy-phone
+    subject: Step count
+    description: Buying a phone takes 4 steps on web but 6 in the app (protection interstitial + bag).
+  - id: PD19
+    category: flow
+    flow: pay-bill
+    subject: Step names
+    description: Same 3 steps, but the review step is "Review Payment" on web vs "Confirm Payment" in the app.
+
+# Deliberately identical (should produce NO findings): Home and Support page names, the Support page's
+# inline chat panel, Cart/Bag and Review Plan Change chatbot absence, the plan-change pages, and the
+# "Switch plan" goal-driven flow (3 steps on both platforms).

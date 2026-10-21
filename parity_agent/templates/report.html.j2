@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Parity Report</title>
+<style>
+  :root {
+    --paper: #f7f6f2; --card: #ffffff; --ink: #14161f; --muted: #5d6475; --line: #e3e1da;
+    --accent: #3b3fd8; --accent-soft: #ecebff;
+    --high: #c2352b; --high-soft: #fdecea; --medium: #b86b00; --medium-soft: #fff3df;
+    --low: #4f5b6e; --low-soft: #eef1f5; --ok: #157a5b; --ok-soft: #e4f5ee;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 15px/1.55 "Inter", "Segoe UI", system-ui, -apple-system, sans-serif; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px 64px; }
+  header.top { background: var(--ink); color: #fff; padding: 36px 0 30px; margin-bottom: 28px; }
+  header.top .eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #a5a8ff; }
+  header.top h1 { font-size: 34px; letter-spacing: -.02em; margin: 10px 0 6px; }
+  header.top .meta { color: #b9bccb; font-size: 13px; }
+  header.top code { font-family: var(--mono); color: #e5e6ff; }
+  .banner { background: #fff7d6; border: 1px solid #f1d77a; color: #5b4500; padding: 10px 14px;
+            border-radius: 8px; margin: 0 0 22px; font-weight: 600; font-size: 14px; }
+  h2 { font-size: 20px; letter-spacing: -.01em; margin: 40px 0 14px; display: flex; align-items: baseline; gap: 10px; }
+  h2 .count { font: 500 13px var(--mono); color: var(--muted); }
+  .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .kpi .v { font-size: 28px; font-weight: 750; letter-spacing: -.02em; }
+  .kpi .l { color: var(--muted); font-size: 12.5px; }
+  .kpi.alert .v { color: var(--high); }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .summary { font-size: 16px; line-height: 1.65; max-width: 900px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 13.5px; }
+  th { font: 600 11.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: #fbfaf7; }
+  .tbl { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font: 600 11.5px/1.6 var(--mono); white-space: nowrap; }
+  .sev-high { background: var(--high-soft); color: var(--high); }
+  .sev-medium { background: var(--medium-soft); color: var(--medium); }
+  .sev-low { background: var(--low-soft); color: var(--low); }
+  .act { background: var(--accent-soft); color: var(--accent); }
+  .act-redesign { background: #f6e8ff; color: #7b2fb5; }
+  .act-add-component { background: var(--ok-soft); color: var(--ok); }
+  .cat { background: #f1f0eb; color: #3d4150; }
+  .mono { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .diffv { font-family: var(--mono); font-size: 12px; min-width: 200px; }
+  .diffv .w { color: #1d4ed8; } .diffv .a { color: #a21caf; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .filters button { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 5px 12px;
+                    font: 600 12px var(--mono); cursor: pointer; color: var(--muted); }
+  .filters button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .flows { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px; }
+  .flow h3 { margin: 0 0 4px; font-size: 16px; }
+  .flow .sub { color: var(--muted); font-size: 12.5px; margin-bottom: 12px; }
+  .steps { display: grid; grid-template-columns: 28px 1fr 1fr; gap: 6px 10px; align-items: stretch; }
+  .steps .hd { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .steps .n { font: 600 12px var(--mono); color: var(--muted); padding-top: 8px; }
+  .step { border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; font-size: 13px; background: #fcfcfa; }
+  .step b { display: block; font-size: 13.5px; }
+  .step span { color: var(--muted); font-size: 12px; }
+  .step.diff { border-color: #e9b0ab; background: var(--high-soft); }
+  .step.none { border-style: dashed; color: var(--muted); background: transparent; text-align: center; }
+  .totals { display: grid; grid-template-columns: 28px 1fr 1fr; gap: 10px; margin-top: 10px; font: 600 13px var(--mono); }
+  .flow .finding { margin-top: 12px; font-size: 13px; }
+  .pair { margin-bottom: 22px; }
+  .pair-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .pair-head h3 { margin: 0; font-size: 18px; }
+  .pair-head h3 .vs { color: var(--muted); font-weight: 500; margin: 0 6px; }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 12px; }
+  .chip { border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; font: 12px var(--mono); color: var(--muted); }
+  .chip b { color: var(--ink); font-weight: 600; }
+  .pf { margin: 0 0 14px; padding: 0; list-style: none; }
+  .pf li { padding: 6px 0; border-top: 1px dashed var(--line); font-size: 13.5px; display: flex; gap: 8px; align-items: baseline; }
+  .pf li:first-child { border-top: 0; }
+  .ok-note { color: var(--ok); font-size: 13.5px; margin-bottom: 14px; }
+  .shots { display: grid; grid-template-columns: 640px 300px; gap: 20px; align-items: start; }
+  .shot { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+  .shot .cap { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
+               padding: 7px 10px; border-bottom: 1px solid var(--line); background: #fbfaf7; }
+  .shot .frame { max-height: 560px; overflow-y: auto; }
+  .shot img { display: block; width: 100%; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 16px; }
+  @media (max-width: 1100px) { .kpis { grid-template-columns: repeat(3, 1fr); } .shots { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap" style="padding-bottom:0">
+    <div class="eyebrow">UI parity audit &middot; web vs app</div>
+    <h1>Cross-platform consistency report</h1>
+    <div class="meta">Generated {{ r.generated_at }} &middot; web <code>{{ r.web_url }}</code> &middot; app <code>{{ r.app_url }}</code></div>
+  </div>
+</header>
+<div class="wrap">
+  {% if r.llm.is_mock %}<div class="banner">{{ r.llm.describe() }}</div>{% endif %}
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">{{ r.web_pages|length }} / {{ r.app_pages|length }}</div><div class="l">pages crawled (web / app)</div></div>
+    <div class="kpi"><div class="v">{{ r.pairs|length }}</div><div class="l">matched page pairs</div></div>
+    <div class="kpi"><div class="v">{{ r.findings|length }}</div><div class="l">differences found</div></div>
+    <div class="kpi alert"><div class="v">{{ sev['high'] }}</div><div class="l">high severity</div></div>
+    <div class="kpi"><div class="v">{{ actions['rename'] }} / {{ actions['redesign'] }}</div><div class="l">pages to rename / redesign</div></div>
+    {% if r.evaluation %}
+    <div class="kpi"><div class="v">{{ '%.0f'|format(r.evaluation.overall.recall * 100) }}%</div><div class="l">recall vs planted ({{ '%.0f'|format(r.evaluation.overall.precision * 100) }}% precision)</div></div>
+    {% else %}
+    <div class="kpi"><div class="v">{{ flows|length }}</div><div class="l">happy-path flows compared</div></div>
+    {% endif %}
+  </div>
+
+  <h2>Executive summary</h2>
+  <div class="panel summary">{{ r.advice.executive_summary }}</div>
+
+  <h2>Prioritised recommendations <span class="count">{{ r.advice.recommendations|length }} pages</span></h2>
+  <div class="tbl"><table>
+    <tr><th>#</th><th>Page</th><th>Action</th><th>Resolves</th><th>Rationale</th></tr>
+    {% for rec in r.advice.recommendations %}
+    <tr><td class="mono">{{ rec.priority }}</td><td><b>{{ rec.page }}</b></td>
+        <td><span class="pill act act-{{ rec.action }}">{{ rec.action }}</span></td>
+        <td class="mono">{{ rec.finding_ids|join(', ') }}</td><td>{{ rec.rationale }}</td></tr>
+    {% endfor %}
+  </table></div>
+
+  <h2>Findings <span class="count">{{ r.findings|length }}</span></h2>
+  <div class="filters" id="filters">
+    <button class="on" data-cat="all">all</button>
+    {% for c in categories %}<button data-cat="{{ c }}">{{ c }} ({{ cat[c] }})</button>{% endfor %}
+  </div>
+  <div class="tbl"><table id="findings">
+    <tr><th>ID</th><th>Severity</th><th>Category</th><th>Page</th><th>Difference</th><th>Web &rarr; App</th><th>Proposed fix</th></tr>
+    {% for f in r.findings %}
+    <tr data-cat="{{ f.category }}">
+      <td class="mono">{{ f.id }}</td>
+      <td><span class="pill sev-{{ f.severity }}">{{ f.severity }}</span></td>
+      <td><span class="pill cat">{{ f.category }}</span></td>
+      <td><b>{{ f.page }}</b></td>
+      <td>{{ f.description }}</td>
+      <td class="diffv">{% if f.category != 'flow' %}<span class="w">web: {{ f.web_value or '—' }}</span><br><span class="a">app: {{ f.app_value or '—' }}</span>{% else %}<span class="w">web: {{ f.web_value.split(' > ')|length if f.web_value else 0 }} steps</span><br><span class="a">app: {{ f.app_value.split(' > ')|length if f.app_value else 0 }} steps</span>{% endif %}</td>
+      <td>{{ f.proposed_fix }} <span class="pill act act-{{ f.action }}">{{ f.action }}</span></td>
+    </tr>
+    {% endfor %}
+  </table></div>
+
+  {% if flows %}
+  <h2>Happy-path flows <span class="count">{{ flows|length }}</span></h2>
+  <div class="flows">
+    {% for fl in flows %}
+    <div class="panel flow">
+      <h3>{{ fl.web.flow_name }}</h3>
+      <div class="sub">{{ fl.web.mode }} flow &middot; id <span class="mono">{{ fl.id }}</span></div>
+      <div class="steps">
+        <div></div><div class="hd">Web</div><div class="hd">App</div>
+        {% for i in range(fl.rows) %}
+          {% set ws = fl.web.steps[i] if i < fl.web.steps|length else None %}
+          {% set as_ = fl.app.steps[i] if i < fl.app.steps|length else None %}
+          {% set differs = (not ws) or (not as_) or (ws.page_name|lower != as_.page_name|lower) %}
+          <div class="n">{{ i + 1 }}</div>
+          {% for s in [ws, as_] %}
+            {% if s %}<div class="step {{ 'diff' if differs else '' }}"><b>{{ s.page_name }}</b><span>{{ s.action }}</span></div>
+            {% else %}<div class="step none">no step</div>{% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="totals"><div></div>
+        <div>{{ fl.web.step_count }} steps {{ '✓' if fl.web.success else '✗ failed' }}</div>
+        <div>{{ fl.app.step_count }} steps {{ '✓' if fl.app.success else '✗ failed' }}</div>
+      </div>
+      {% for f in fl.findings %}<div class="finding"><span class="pill sev-{{ f.severity }}">{{ f.severity }}</span> {{ f.description }}</div>{% endfor %}
+      {% if not fl.findings %}<div class="finding ok-note">Consistent on both platforms.</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h2>Page by page <span class="count">{{ pages|length }} pairs</span></h2>
+  {% for p in pages %}
+  <div class="panel pair" id="pair-{{ loop.index }}">
+    <div class="pair-head">
+      <h3>{{ p.pair.web.name }}<span class="vs">&harr;</span>{{ p.pair.app.name }}</h3>
+      <div class="mono">{{ p.pair.web.path }} &harr; {{ p.pair.app.path }} &middot; match {{ '%.2f'|format(p.pair.score) }} ({{ p.pair.method }})</div>
+    </div>
+    <div class="chips">
+      <span class="chip">assistant web <b>{{ p.pair.web.chat.position }}</b></span>
+      <span class="chip">assistant app <b>{{ p.pair.app.chat.position }}</b></span>
+      <span class="chip">components <b>{{ p.pair.web.components|length }}</b> / <b>{{ p.pair.app.components|length }}</b></span>
+    </div>
+    {% if p.findings %}
+    <ul class="pf">
+      {% for f in p.findings %}<li><span class="pill sev-{{ f.severity }}">{{ f.severity }}</span><span class="pill cat">{{ f.category }}</span> {{ f.description }}</li>{% endfor %}
+    </ul>
+    {% else %}<div class="ok-note">No differences detected on this page.</div>{% endif %}
+    <div class="shots">
+      <div class="shot"><div class="cap">Web &middot; desktop</div><div class="frame">{% if p.web_img %}<img src="{{ p.web_img }}" alt="Web screenshot of {{ p.pair.web.name }}">{% endif %}</div></div>
+      <div class="shot"><div class="cap">App &middot; mobile</div><div class="frame">{% if p.app_img %}<img src="{{ p.app_img }}" alt="App screenshot of {{ p.pair.app.name }}">{% endif %}</div></div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% if unmatched %}
+  <h2>Pages on one platform only <span class="count">{{ unmatched|length }}</span></h2>
+  {% for u in unmatched %}
+  <div class="panel pair">
+    <div class="pair-head"><h3>{{ u.page.name }}</h3><div class="mono">{{ u.page.platform }} only &middot; {{ u.page.path }}</div></div>
+    <div class="shots" style="margin-top:12px"><div class="shot"><div class="cap">{{ u.page.platform }}</div><div class="frame"><img src="{{ u.img }}" alt="Screenshot of {{ u.page.name }}"></div></div></div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if r.evaluation %}
+  <h2>Evaluation against planted differences</h2>
+  <div class="tbl"><table>
+    <tr><th>Category</th><th>Planted</th><th>Reported</th><th>True positives</th><th>Precision</th><th>Recall</th></tr>
+    {% for s in r.evaluation.per_category + [r.evaluation.overall] %}
+    <tr{% if loop.last %} style="font-weight:700"{% endif %}><td>{{ s.category }}</td><td>{{ s.tp + s.fn }}</td><td>{{ s.tp + s.fp }}</td><td>{{ s.tp }}</td>
+      <td>{{ '%.2f'|format(s.precision) }}</td><td>{{ '%.2f'|format(s.recall) }}</td></tr>
+    {% endfor %}
+  </table></div>
+  {% endif %}
+
+  <footer>LLM usage: {{ usage }}. Deterministic findings come from the diff engine; the LLM layer only proposes names, summary and priorities.</footer>
+</div>
+<script>
+  document.getElementById("filters").addEventListener("click", function (e) {
+    var cat = e.target.getAttribute("data-cat");
+    if (!cat) return;
+    this.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", b === e.target); });
+    document.querySelectorAll("#findings tr[data-cat]").forEach(function (tr) {
+      tr.style.display = (cat === "all" || tr.getAttribute("data-cat") === cat) ? "" : "none";
+    });
+  });
+</script>
+</body>
+</html>

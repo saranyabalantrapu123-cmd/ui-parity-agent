@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Profile &middot; Nimbus</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body class="app">
+<header class="app-bar">
+  <a class="app-bar__brand" href="/index.html">Nimbus</a>
+  <span class="app-bar__title">Profile</span>
+  <a class="app-bar__icon" href="/support.html" aria-label="Support">Help</a>
+  <a class="app-bar__icon" href="/bag.html" aria-label="Bag">Bag</a>
+</header>
+<main>
+<h1>Profile</h1>
+<p class="lede">Signed in as Alex Rivera &middot; Line (555) 010-2040</p>
+<section class="account-grid" aria-label="Account overview">
+  <div class="card-grid">
+    <article class="card"><h3>Line details</h3><p>Unlimited plan &middot; Nimbus X12</p><a class="btn btn-ghost" href="/plans.html">Change Plan</a></article>
+    <article class="card"><h3>Autopay</h3><p>On &middot; Visa ending 4242</p><button type="button" class="btn btn-ghost">Manage Autopay</button></article>
+    <article class="card"><h3>Data usage</h3><p>18.2GB of unlimited used this cycle.</p></article>
+  </div>
+</section>
+<section class="rewards" aria-label="Nimbus Rewards">
+  <h2>Nimbus Rewards</h2>
+  <p>You have 1,250 points. Redeem them for device credits and perks.</p>
+  <button type="button" class="btn btn-light">View Rewards</button>
+</section>
+</main>
+<nav class="tab-bar" aria-label="Tabs">
+  <a href="/index.html"><span class="dot"></span>Home</a>
+  <a href="/devices.html"><span class="dot"></span>Devices</a>
+  <a href="/plans.html"><span class="dot"></span>Plans</a>
+  <a href="/billing.html"><span class="dot"></span>Billing</a>
+  <a href="/profile.html" aria-current="page"><span class="dot"></span>Profile</a>
+</nav>
+<div class="chat-launcher" id="nimbus-assistant" aria-label="Nimbus Assistant">
+  <div class="chat-window" hidden>
+    <div class="chat-window__head">Nova &middot; Nimbus Assistant</div>
+    <p class="chat-window__msg">Hi, I'm Nova. Ask me about plans, bills, or devices.</p>
+  </div>
+  <button type="button" class="chat-launcher__btn" aria-expanded="false">Ask Nova</button>
+</div>
+<script src="/assets/app.js"></script>
+</body>
+</html>

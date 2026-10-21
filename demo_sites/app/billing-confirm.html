@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Confirm Payment &middot; Nimbus</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body class="app">
+<header class="app-bar">
+  <a class="app-bar__brand" href="/index.html">Nimbus</a>
+  <span class="app-bar__title">Confirm Payment</span>
+  <a class="app-bar__icon" href="/support.html" aria-label="Support">Help</a>
+  <a class="app-bar__icon" href="/bag.html" aria-label="Bag">Bag</a>
+</header>
+<main>
+<h1>Confirm Payment</h1>
+<section class="panel" aria-label="Payment review">
+  <div class="summary-row"><span>Amount</span><strong data-echo="amount">$65.00</strong></div>
+  <div class="summary-row"><span>Method</span><strong>Visa ending 4242</strong></div>
+  <form aria-label="Payment review form" action="/payment-confirmation.html" method="get">
+    <button type="submit" class="btn btn-primary">Confirm &amp; Pay</button>
+  </form>
+</section>
+</main>
+<nav class="tab-bar" aria-label="Tabs">
+  <a href="/index.html"><span class="dot"></span>Home</a>
+  <a href="/devices.html"><span class="dot"></span>Devices</a>
+  <a href="/plans.html"><span class="dot"></span>Plans</a>
+  <a href="/billing.html" aria-current="page"><span class="dot"></span>Billing</a>
+  <a href="/profile.html"><span class="dot"></span>Profile</a>
+</nav>
+<script src="/assets/app.js"></script>
+</body>
+</html>

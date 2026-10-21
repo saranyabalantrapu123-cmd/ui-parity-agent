@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nimbus X15 | Nimbus Wireless</title>
+  <link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/index.html">Nimbus<span>Wireless</span></a>
+  <nav aria-label="Primary">
+    <a href="/plans.html">Plans</a>
+    <a href="/phones.html">Shop Phones</a>
+    <a href="/pay-bill.html">Pay Bill</a>
+    <a href="/support.html">Support</a>
+    <a href="/account.html">My Account</a>
+    <a class="nav-cart" href="/cart.html">Cart</a>
+  </nav>
+</header>
+<main>
+<section class="split product-summary" aria-label="Nimbus X15 overview">
+  <div class="device-shot">Nimbus X15</div>
+  <div>
+    <h1>Nimbus X15</h1>
+    <p class="price">$799 <small>or $33.29/mo for 24 months</small></p>
+    <ul class="specs">
+      <li>6.4" OLED display, 120Hz</li>
+      <li>50MP main camera with night mode</li>
+      <li>5,000 mAh battery</li>
+      <li>128GB storage</li>
+    </ul>
+    <a class="btn btn-primary" href="/checkout.html">Buy Now</a>
+  </div>
+</section>
+<section class="trade-in panel" aria-label="Trade-in estimator">
+  <h2>Trade in your old phone</h2>
+  <form aria-label="Trade-in form" onsubmit="return false">
+    <label for="trade-model">Current phone</label>
+    <select id="trade-model"><option>Nimbus X12</option><option>Nimbus S7</option><option>Other brand</option></select>
+    <label for="trade-condition">Condition</label>
+    <select id="trade-condition"><option value="good">Good</option><option value="fair">Fair</option><option value="poor">Poor</option></select>
+    <button type="button" id="trade-estimate-btn" class="btn btn-secondary">Estimate Trade-in</button>
+    <p id="trade-estimate"></p>
+  </form>
+</section>
+</main>
+<footer class="site-footer"><p>&copy; 2026 Nimbus Wireless &mdash; a fictional carrier. Demo site for UI parity testing.</p></footer>
+<div class="chat-launcher" id="nimbus-assistant" aria-label="Nimbus Assistant">
+  <div class="chat-window" hidden>
+    <div class="chat-window__head">Nova &middot; Nimbus Assistant</div>
+    <p class="chat-window__msg">Hi, I'm Nova. Ask me about plans, bills, or devices.</p>
+  </div>
+  <button type="button" class="chat-launcher__btn" aria-expanded="false">Ask Nova</button>
+</div>
+<script src="/assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Billing & Payments &middot; Nimbus</title>
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body class="app">
+<header class="app-bar">
+  <a class="app-bar__brand" href="/index.html">Nimbus</a>
+  <span class="app-bar__title">Billing & Payments</span>
+  <a class="app-bar__icon" href="/support.html" aria-label="Support">Help</a>
+  <a class="app-bar__icon" href="/bag.html" aria-label="Bag">Bag</a>
+</header>
+<main>
+<h1>Billing &amp; Payments</h1>
+<section class="panel" aria-label="Balance">
+  <article class="card"><h3>Current balance</h3><p class="price">$65.00</p><p>Due November 5, 2026</p></article>
+</section>
+<section class="panel" aria-label="Make a payment">
+  <form aria-label="Payment form" action="/billing-confirm.html" method="get">
+    <label for="amount">Amount</label>
+    <input id="amount" name="amount" value="65.00" required>
+    <label for="method">Payment method</label>
+    <select id="method" name="method"><option>Visa ending 4242</option><option>Bank account ending 0110</option></select>
+    <button type="submit" class="btn btn-primary">Continue</button>
+  </form>
+</section>
+</main>
+<nav class="tab-bar" aria-label="Tabs">
+  <a href="/index.html"><span class="dot"></span>Home</a>
+  <a href="/devices.html"><span class="dot"></span>Devices</a>
+  <a href="/plans.html"><span class="dot"></span>Plans</a>
+  <a href="/billing.html" aria-current="page"><span class="dot"></span>Billing</a>
+  <a href="/profile.html"><span class="dot"></span>Profile</a>
+</nav>
+<div class="chat-launcher" id="nimbus-assistant" aria-label="Nimbus Assistant">
+  <div class="chat-window" hidden>
+    <div class="chat-window__head">Nova &middot; Nimbus Assistant</div>
+    <p class="chat-window__msg">Hi, I'm Nova. Ask me about plans, bills, or devices.</p>
+  </div>
+  <button type="button" class="chat-launcher__btn" aria-expanded="false">Ask Nova</button>
+</div>
+<script src="/assets/app.js"></script>
+</body>
+</html>

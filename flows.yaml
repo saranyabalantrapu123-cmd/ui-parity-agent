@@ -1,0 +1,64 @@
+# Happy-path flows executed on both platforms.
+#
+# mode: scripted (default) - explicit steps per platform. Each step can `fill` form fields by label
+#                            and then `click` an element by accessible name / visible text
+#                            (or `selector` for a CSS selector).
+# mode: goal               - only a goal sentence + start page; the agent explores the UI and picks
+#                            each click itself (LLM, or keyword scoring offline) until `success_text`
+#                            appears or `max_steps` is reached.
+#
+# A "step" is one user decision (a click, optionally preceded by filling a form).
+
+flows:
+  - id: buy-phone
+    name: Buy a phone
+    description: From the home page, find the Nimbus X15 and place an order.
+    success_text: Order Confirmed
+    web:
+      start: /index.html
+      steps:
+        - click: Shop Phones
+        - click: View Details
+        - click: Buy Now
+        - fill: {Full name: Alex Rivera, Shipping address: 100 Market Street, Card number: "4242424242424242"}
+          click: Place Order
+    app:
+      start: /index.html
+      steps:
+        - click: Devices
+        - click: View Details
+        - click: Add to Bag
+        - click: No Thanks
+        - click: Checkout
+        - fill: {Full name: Alex Rivera, Shipping address: 100 Market Street, Card number: "4242424242424242"}
+          click: Place Order
+
+  - id: pay-bill
+    name: Pay bill
+    description: Pay the current balance with the saved card.
+    success_text: Payment Received
+    web:
+      start: /index.html
+      steps:
+        - click: Pay Bill
+        - fill: {Amount: "65.00"}
+          click: Review Payment
+        - click: Submit Payment
+    app:
+      start: /index.html
+      steps:
+        - click: Billing
+        - fill: {Amount: "65.00"}
+          click: Continue
+        - click: Confirm & Pay
+
+  - id: switch-plan
+    name: Switch plan
+    mode: goal
+    goal: Switch my plan to Unlimited Plus
+    success_text: Plan Updated
+    max_steps: 6
+    web:
+      start: /index.html
+    app:
+      start: /index.html
